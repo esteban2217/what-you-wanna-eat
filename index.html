@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <!-- from google -->
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no"> 
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>What Do You Wanna Eat?</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Open+Sans+Condensed:300|Permanent+Marker|Raleway|Roboto" rel="stylesheet">
+  <!-- Fontawesome Icons -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header>
+    <div id="logSignDiv">
+      <button class = "logButtons" id="LogSignButton">LOG IN / SIGN UP</button>
+      <button class = "logButtons" id="LogOutButton">LOG OUT</button>
+    </div>
+    <div id="logInDiv">
+      <div id="formDiv">
+        <form id="username-form">
+          <label for="username-input">Username:</label><br>
+          <input type="text" id="username-input"><br>
+        </form>
+        <form id="password-form">
+          <label for="password-input">Password:</label><br>
+          <input type="password" id="password-input"><br>
+          <button class="formButtons" id="logInButton">LOG IN</button>
+        </form>
+        <br>
+        <p>
+          Don't have an account? 
+          <button class="formButtons" id="signUp">SIGN UP!</button>
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="frontPage">
+      
+      <div id="frontTitle">
+        <h1>What Do You <br>Wanna Eat?</h1>
+        <h3>An app to help you decide when you're being indecisive.</h3>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <div id="">
+    </div>
+  </footer>
+
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCIWbtgXbcI90D2ADfqPjRK5n1HyBFrLy8"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+  <script src="https://storage.googleapis.com/code-snippets/rapidapi.min.js"></script>
+  <script src="assets/javascript/app.js"></script>
+</body>
+</html>

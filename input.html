@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Input</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+<body>
+    <div id="input-div">
+        <div class="container">
+            <form id="inputForm">
+                <h1>What Do You Wanna Eat?!</h1>
+                <div id="nameInputDiv">
+                    <input id="inputFirstNameInput" type="text" placeholder="First Name">
+                    <input id="inputLastNameInput" type="text" placeholder="Last Name">
+                </div>
+                <!-- <br> -->
+                <!--   <input type="email"  placeholder="Email" id="email">
+                <input type="password"  placeholder="Password" id="ps"><br> -->
+                <!-- <p>Are you diabetic?</p>
+                <input type="radio" value="yes"> Yes
+                <input type="radio" value="no"> No -->
+                <div id="proteinDiv">
+                    <h2>Prefer Proteins:</h2>
+                    <input type="checkbox" id="protein1" class="meats" value="Beef"> Beef
+                    <input type="checkbox" id="protein2" class="meats" value="Chicken"> Chicken
+                    <input type="checkbox" id="protein3" class="meats" value="Fish"> Fish
+                    <input type="checkbox" id="protein4" class="meats" value="Shellfish">Shellfish <br>
+                </div>
+                <div id="vegPref">
+                    <h2>Prefer Vegan/Vegetarian:</h2>
+                    <input type="checkbox" id="protein5" class="veg" value="Tofu"> Tofu
+                    <input type="checkbox" id="protein6" class="veg" value="Eggs"> Eggs
+                    <input type="checkbox" id="protein7" class="veg" value="Lentil"> Lentils
+                    <input type="checkbox" id="protein8" class="veg" value="Tempeh"> Tempeh 
+                </div>
+
+                <div id="dietRestrictions">
+                    <h2>Dietary Restrictions:</h2>
+                    <div id="inputContainer">
+                        <div class ="inputBox">
+                            <input type="checkbox" id="restriction1" class="restrictions" value="dairy-free">
+                            <label for="restriction1">Dairy-free</label>
+                            <input type="checkbox" id="restriction2" class="restrictions" value="peanut-free">
+                            <label for="restriction2">Peanut-free</label>
+                            <input type="checkbox" id="restriction3" class="restrictions" value="wheat-free">
+                            <label for="restriction3">Wheat-free</label>
+                            <input type="checkbox" id="restriction4" class="restrictions" value="soy-free">
+                            <label for="restriction4">Soy-free</label>
+                        </div>
+                        <div class ="inputBox">
+                            <input type="checkbox" id="restriction5" class="restrictions" value="fish-free">
+                            <label for="restriction5">Fish-free</label>
+                            <input type="checkbox" id="restriction6" class="restrictions" value="shellfish-free">
+                            <label for="restriction6">Shellfish-free</label>
+                            <input type="checkbox" id="restriction7" class="restrictions" value="tree-nut-free">
+                            <label for="restriction7">Tree-Nut-free</label>
+                            <input type="checkbox" id="restriction8" class="restrictions" value="gluten-free">
+                            <label for="restriction8">Gluten-free</label>
+                        </div>
+                        <div class ="inputBox">
+                            <input type="checkbox" id="restriction9" class="restrictions" value="egg-free">
+                            <label for="restriction9">Egg-free</label>
+                            <input type="checkbox" id="restriction10" class="restrictions" value="fat-free">
+                            <label for="restriction10">Fat-free</label>
+                            <input type="checkbox" id="restriction11" class="restrictions" value="low-sugar">
+                            <label for="restriction11">Low-sugar</label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="decideButtons" id="input-submit-btn" type="submit">Submit</button>
+                    <button class="decideButtons" id="input-cancel-btn" type="cancel">Cancel</button>
+                </div>
+                <!-- <input type="reset" value="Reset"> -->
+            </form>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCeEfjqDlvTZ9eHxtgANgsdAdPby1opHs0",
+        authDomain: "what-do-you-wanna-eat.firebaseapp.com",
+        databaseURL: "https://what-do-you-wanna-eat.firebaseio.com",
+        projectId: "what-do-you-wanna-eat",
+        storageBucket: "",
+        messagingSenderId: "746879320609"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        
+        $("#inputSubmitBtn").on("click", function () {
+            event.preventDefault();
+
+            var fn = $("#inputFirstNameInput").val();
+            var ln = $("#inputLastNameInput").val();
+            
+
+            var meatArray = [];
+            $(".meats:checked").each(function() {
+                meatArray.push($(this).val());
+            });
+            var vegArray = [];
+            $(".veg:checked").each(function() {
+                vegArray.push($(this).val());
+            });
+             var restrictionsArray = [];
+            $(".restrictions:checked").each(function() {
+                restrictionsArray.push($(this).val());
+            });
+            console.log(fn, ln, meatArray, vegArray, restrictionsArray); 
+            var db = firebase.database();
+            db.ref("x").push({
+                firstName: fn,
+                lastName: ln,
+                meat: meatArray,
+                veg: vegArray,
+                restrictions: restrictionsArray
+            })   
+
+            db.ref("y/z").set({
+                firstName: fn,
+                lastName: ln,
+                meat: meatArray,
+                veg: vegArray,
+                restrictions: restrictionsArray
+            })
+        });
+
+
+        $("#inputCancelBtn").on("click", function () { //reset btn
+            event.preventDefault();
+            var fn = $("#firstName").val("");
+            var ln = $("#lastName").val("");
+            var db = firebase.database();
+            console.log('hello');
+            var ref = db.ref("y").orderByKey().equalTo("z");
+            ref.once("value")
+            .then (function(snap){
+            console.log(snap.val()); 
+            var obj = snap.val(); 
+            console.log(obj.z.restrictions);
+            })
+            
+        });
+
+
+        function searchEdemam(food, count=2) {
+  var appId = '94109746';
+  var appKey = '987f9b2768860ef9a7e37737bb3ced9f';
+
+  var endPoint = 'https://api.edamam.com/search';
+  var param = $.param({
+    q: food,
+    healthLabels: "",
+    to: count,
+    app_id: appId,
+    app_key: appKey
+  });
+
+  $.ajax({
+    url: endPoint + '?' + param,
+  })
+  .then(function(res){
+    console.log(res);
+});
+};
+
+
+
+    </script>
+</body>
+</html>
